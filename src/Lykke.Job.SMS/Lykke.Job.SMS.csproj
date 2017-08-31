@@ -39,6 +39,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lykke.Job.SMS.Core\Lykke.Job.SMS.Core.csproj" />
-    <ProjectReference Include="..\Lykke.Job.SMS.Services\Lykke.Job.SMS.Services.csproj" />
   </ItemGroup>
 </Project>
