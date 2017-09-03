@@ -14,6 +14,7 @@
     public class DbSettings
     {
         public string LogsConnString { get; set; }
+        public string SmsConnString { get; set; }
     }
 
     public class SlackNotificationsSettings

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using Lykke.Job.SMS.Core.Domain;
+using Lykke.Service.SMS.Core.Domain;
 
 namespace Lykke.Service.SMS.Core.Services
 {
     public interface ISmsService
     {
-        SmsPostRequestStatus SendSms(ISmsModel sms);
+        Task<ISmsResponseModel> SendSms(ISmsModel sms);
     }
 }

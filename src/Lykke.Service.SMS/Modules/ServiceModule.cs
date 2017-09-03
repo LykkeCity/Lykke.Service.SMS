@@ -1,6 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AzureStorage.Tables;
 using Common.Log;
+using Lykke.AzureRepositories;
+using Lykke.AzureRepositories.Log;
+using Lykke.Core;
 using Lykke.Service.SMS.Core;
 using Lykke.Service.SMS.Core.Services;
 using Lykke.Service.SMS.Services;
@@ -36,7 +40,17 @@ namespace Lykke.Service.SMS.Modules
                 .As<IHealthService>()
                 .SingleInstance();
 
-            // TODO: Add your dependencies here
+           
+
+            Lykke.Core.Log.ILog log = new CommonLogAdapter(_log);
+            var smsRepository = new SmsServiceRepository(new AzureRepositories.Azure.Tables.AzureTableStorage<SmsEntity>(_settings.Db.SmsConnString, "SmsServiceRequests", log), log);
+            builder.RegisterInstance(smsRepository)
+                .As<ISmsServiceRepository>()
+                .SingleInstance();
+
+            builder.RegisterType<SmsService>()
+                .As<ISmsService>()
+                .SingleInstance();
 
             builder.Populate(_services);
         }

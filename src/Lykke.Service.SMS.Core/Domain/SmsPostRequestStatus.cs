@@ -7,6 +7,8 @@ namespace Lykke.Job.SMS.Core.Domain
     public enum SmsPostRequestStatus
     {
         Ok,
-        Error
+        Error,
+        PhoneNumberEmpty,
+        MessageEmpty
     }
 }
