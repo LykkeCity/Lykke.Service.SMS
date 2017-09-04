@@ -22,9 +22,9 @@ namespace Lykke.Job.SMS.Services.SmsSender
 
         private const string NexmoSendSmsUrlFormat = "https://rest.nexmo.com/sms/json?api_key={0}&api_secret={1}&from={2}&to={3}&text={4}";
 
-        public NexmoSender(AppSettings.NexmoSettings settings, ILog log)
+        public NexmoSender(AppSettings.SMSSettings settings, ILog log)
         {
-            _settings = settings;
+            _settings = settings.Nexmo;
             _log = log;
         }
 

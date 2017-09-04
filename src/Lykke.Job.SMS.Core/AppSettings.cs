@@ -8,7 +8,6 @@
         public class SMSSettings
         {
             public DbSettings Db { get; set; }
-            public string TriggerQueueConnectionString { get; set; }
             public TwilioSettings Twilio { get; set; }
             public NexmoSettings Nexmo { get; set; }
         }
@@ -32,6 +31,7 @@
         public class DbSettings
         {
             public string LogsConnString { get; set; }
+            public string SmsConnString { get; set; }
         }
 
         public class SlackNotificationsSettings

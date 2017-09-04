@@ -2,9 +2,13 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common.Log;
+using Lykke.AzureRepositories;
+using Lykke.AzureRepositories.Log;
+using Lykke.Core;
 using Lykke.Job.SMS.Core;
 using Lykke.Job.SMS.Core.Services;
 using Lykke.Job.SMS.Services;
+using Lykke.Job.SMS.Services.SmsSender;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lykke.Job.SMS.Modules
@@ -42,7 +46,15 @@ namespace Lykke.Job.SMS.Modules
             builder.RegisterType<SendSmsService>()
                 .As<ISendSmsService>();
 
-            
+            Lykke.Core.Log.ILog log = new CommonLogAdapter(_log);
+            var smsRepository = new SmsServiceRepository(new AzureRepositories.Azure.Tables.AzureTableStorage<SmsEntity>(_settings.Db.SmsConnString, "SmsServiceRequests", log), log);
+            builder.RegisterInstance(smsRepository)
+                .As<ISmsServiceRepository>()
+                .SingleInstance();
+
+            builder.RegisterType<NexmoSender>();
+            builder.RegisterType<TwilioSender>();
+
 
             // NOTE: You can implement your own poison queue notifier. See https://github.com/LykkeCity/JobTriggers/blob/master/readme.md
             // builder.Register<PoisionQueueNotifierImplementation>().As<IPoisionQueueNotifier>();

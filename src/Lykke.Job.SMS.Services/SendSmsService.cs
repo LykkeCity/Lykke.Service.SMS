@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Common.Log;
+using Lykke.AzureRepositories;
 using Lykke.Core;
 using Lykke.Job.SMS.Core.Domain;
 using Lykke.Job.SMS.Core.Services;
@@ -31,7 +32,7 @@ namespace Lykke.Job.SMS.Services
                 Console.WriteLine($"SMS: {message.Message}. Receiver: {message.PhoneNumer}, UTC: {DateTime.UtcNow}");
                 var result = await sender.ProcessSmsAsync(message.PhoneNumer,
                     SmsMessage.Create(sender.GetSenderNumber(message.PhoneNumer), message.Message));
-
+                message.ETag = "*";
                 if (!await _smsServiceRepository.DeleteSmsRequestAsync(message))
                 {
                     await _log.WriteErrorAsync("SendSmsService", "Deleting message model", string.Empty, null,

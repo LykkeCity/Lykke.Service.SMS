@@ -65,19 +65,7 @@ namespace Lykke.Job.SMS
             var log = CreateLogWithSlack(services, appSettings);
 
             builder.RegisterModule(new JobModule(appSettings.SMSJob, log));
-
-            if (string.IsNullOrWhiteSpace(appSettings.SMSJob.TriggerQueueConnectionString))
-            {
-                builder.AddTriggers();
-            }
-            else
-            {
-                builder.AddTriggers(pool =>
-                {
-                    pool.AddDefaultConnection(appSettings.SMSJob.TriggerQueueConnectionString);
-                });
-            }
-
+            builder.AddTriggers();
             builder.Populate(services);
 
             ApplicationContainer = builder.Build();

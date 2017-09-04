@@ -17,10 +17,10 @@ namespace Lykke.Job.SMS.Services.SmsSender
         private readonly AppSettings.TwilioSettings _twilioSettings;
         private readonly TwilioRestClient _twilioRestClient;
 
-        public TwilioSender(AppSettings.TwilioSettings settings, ILog log)
+        public TwilioSender(AppSettings.SMSSettings settings, ILog log)
         {
             _log = log;
-            _twilioSettings = settings;
+            _twilioSettings = settings.Twilio;
             _twilioRestClient = new TwilioRestClient(_twilioSettings.AccountSid, _twilioSettings.AuthToken);
         }
 
