@@ -10,15 +10,13 @@ namespace Lykke.Job.SMS.TriggerHandlers
     // when you call builder.AddTriggers() in Startup. Further, JobTriggers infrastructure manages handlers execution.
     public class MyHandlers
     {
-        private readonly IMyFooService _myFooService;
-        private readonly IMyBooService _myBooService;
+        private readonly ISendSmsService _sendSmsService;
         private readonly IHealthService _healthService;
 
         // NOTE: The object is instantiated using DI container, so registered dependencies are injects well
-        public MyHandlers(IMyFooService myFooService, IMyBooService myBooService, IHealthService healthService)
+        public MyHandlers(ISendSmsService sendSmsService, IHealthService healthService)
         {
-            _myFooService = myFooService;
-            _myBooService = myBooService;
+            _sendSmsService = sendSmsService;
             _healthService = healthService;
         }
 
@@ -27,36 +25,18 @@ namespace Lykke.Job.SMS.TriggerHandlers
         {
             try
             {
-                _healthService.TraceFooStarted();
+                _healthService.TraceSendSmsStarted();
 
-                await _myFooService.FooAsync();
+                await _sendSmsService.ProcessMessageAsync();
 
-                _healthService.TraceFooCompleted();
+                _healthService.TraceSendSmsCompleted();
             }
             catch
             {
-                _healthService.TraceFooFailed();
+                _healthService.TraceSendSmsFailed();
             }
         }
 
-        [QueueTrigger("queue-name")]
-        public async Task QueueTriggeredHandler(MyMessage msg)
-        {
-            try
-            {
-                // TODO: See Foo
-                //_healthService.TraceBooStarted();
-
-                await _myBooService.BooAsync();
-
-                // TODO: See Foo
-                //_healthService.TraceBooCompleted();
-            }
-            catch
-            {
-                // TODO: See Foo
-                //_healthService.TraceBooFailed();
-            }
-        }
+       
     }
 }

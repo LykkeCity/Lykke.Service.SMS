@@ -9,6 +9,24 @@
         {
             public DbSettings Db { get; set; }
             public string TriggerQueueConnectionString { get; set; }
+            public TwilioSettings Twilio { get; set; }
+            public NexmoSettings Nexmo { get; set; }
+        }
+
+        public class TwilioSettings
+        {
+            public string AccountSid { get; set; }
+            public string AuthToken { get; set; }
+            public string SwissSender { get; set; }
+            public string UsSender { get; set; }
+        }
+
+        public class NexmoSettings
+        {
+            public string NexmoAppKey { get; set; }
+            public string NexmoAppSecret { get; set; }
+            public string UsCanadaSender { get; set; }
+            public string DefaultSender { get; set; }
         }
 
         public class DbSettings

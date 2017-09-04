@@ -3,8 +3,8 @@
 namespace Lykke.Job.SMS.Core.Services
 {
     // NOTE: This is job service interface example
-    public interface IMyFooService
+    public interface ISendSmsService
     {
-        Task FooAsync();
+        Task ProcessMessageAsync();
     }
 }

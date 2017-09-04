@@ -9,9 +9,9 @@ namespace Lykke.Job.SMS.Core.Services
         string GetHealthViolationMessage();
         IEnumerable<HealthIssue> GetHealthIssues();
 
-        // NOTE: These are example methods
-        void TraceFooStarted();
-        void TraceFooCompleted();
-        void TraceFooFailed();
+
+        void TraceSendSmsStarted();
+        void TraceSendSmsCompleted();
+        void TraceSendSmsFailed();
     }
 }

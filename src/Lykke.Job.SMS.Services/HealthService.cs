@@ -9,18 +9,18 @@ namespace Lykke.Job.SMS.Services
     public class HealthService : IHealthService
     {
         // NOTE: These are example properties
-        private DateTime LastFooStartedMoment { get; set; }
-        private TimeSpan LastFooDuration { get; set; }
-        private TimeSpan MaxHealthyFooDuration { get; }
-        private bool WasLastFooFailed { get; set; }
-        private bool WasLastFooCompleted { get; set; }
-        private bool WasClientsFooEverStarted { get; set; }
+        private DateTime LastSendSmsStartedMoment { get; set; }
+        private TimeSpan LastSendSmsDuration { get; set; }
+        private TimeSpan MaxHealthySendSmsDuration { get; }
+        private bool WasLastSendSmsFailed { get; set; }
+        private bool WasLastSendSmsCompleted { get; set; }
+        private bool WasClientsSendSmsEverStarted { get; set; }
 
         // NOTE: When you change parameters, don't forget to look in to JobModule
 
-        public HealthService(TimeSpan maxHealthyFooDuration)
+        public HealthService(TimeSpan maxHealthySendSmsDuration)
         {
-            MaxHealthyFooDuration = maxHealthyFooDuration;
+            MaxHealthySendSmsDuration = maxHealthySendSmsDuration;
         }
 
         // NOTE: This method could stay in the real job, but will be modified
@@ -34,47 +34,48 @@ namespace Lykke.Job.SMS.Services
         {
             var issues = new HealthIssuesCollection();
 
-            if (WasLastFooFailed)
+            if (WasLastSendSmsFailed)
             {
-                issues.Add("SMSFooProcessing", "Last foo was failed");
+                issues.Add("SMSSendSmsProcessing", "Last SendSms was failed");
             }
 
-            if (!WasLastFooCompleted && !WasLastFooFailed && !WasClientsFooEverStarted)
+            if (!WasLastSendSmsCompleted && !WasLastSendSmsFailed && !WasClientsSendSmsEverStarted)
             {
-                issues.Add("SMSFooProcessingNotStartedYet", "Waiting for first foo execution started");
+                issues.Add("SMSSendSmsProcessingNotStartedYet", "Waiting for first SendSms execution started");
             }
 
-            if (!WasLastFooCompleted && !WasLastFooFailed && WasClientsFooEverStarted)
+            if (!WasLastSendSmsCompleted && !WasLastSendSmsFailed && WasClientsSendSmsEverStarted)
             {
-                issues.Add("SMSFooProcessingNotCompletedYet", $"Waiting {DateTime.UtcNow - LastFooStartedMoment} for first foo execution completed");
+                issues.Add("SMSSendSmsProcessingNotCompletedYet", $"Waiting {DateTime.UtcNow - LastSendSmsStartedMoment} for first SendSms execution completed");
             }
 
-            if (LastFooDuration > MaxHealthyFooDuration)
+            if (LastSendSmsDuration > MaxHealthySendSmsDuration)
             {
-                issues.Add("SMSFooProcessingLastedForToLong", $"Last foo was lasted for {LastFooDuration}, which is too long");
+                issues.Add("SMSSendSmsProcessingLastedForToLong", $"Last SendSms was lasted for {LastSendSmsDuration}, which is too long");
             }
 
             return issues;
         }
 
+
         // NOTE: These are example methods
-        public void TraceFooStarted()
+        public void TraceSendSmsStarted()
         {
-            LastFooStartedMoment = DateTime.UtcNow;
-            WasClientsFooEverStarted = true;
+            LastSendSmsStartedMoment = DateTime.UtcNow;
+            WasClientsSendSmsEverStarted = true;
         }
 
-        public void TraceFooCompleted()
+        public void TraceSendSmsCompleted()
         {
-            LastFooDuration = DateTime.UtcNow - LastFooStartedMoment;
-            WasLastFooCompleted = true;
-            WasLastFooFailed = false;
+            LastSendSmsDuration = DateTime.UtcNow - LastSendSmsStartedMoment;
+            WasLastSendSmsCompleted = true;
+            WasLastSendSmsFailed = false;
         }
 
-        public void TraceFooFailed()
+        public void TraceSendSmsFailed()
         {
-            WasLastFooCompleted = false;
-            WasLastFooFailed = true;
+            WasLastSendSmsCompleted = false;
+            WasLastSendSmsFailed = true;
         }
     }
 }

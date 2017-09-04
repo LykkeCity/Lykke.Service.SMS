@@ -11,23 +11,23 @@ namespace Lykke.Service.SMS.Client.AutorestClient.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class IssueIndicator
+    public partial class SmsRequestModel
     {
         /// <summary>
-        /// Initializes a new instance of the IssueIndicator class.
+        /// Initializes a new instance of the SmsRequestModel class.
         /// </summary>
-        public IssueIndicator()
+        public SmsRequestModel()
         {
           CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the IssueIndicator class.
+        /// Initializes a new instance of the SmsRequestModel class.
         /// </summary>
-        public IssueIndicator(string type = default(string), string value = default(string))
+        public SmsRequestModel(string phoneNumber = default(string), string message = default(string))
         {
-            Type = type;
-            Value = value;
+            PhoneNumber = phoneNumber;
+            Message = message;
             CustomInit();
         }
 
@@ -38,13 +38,13 @@ namespace Lykke.Service.SMS.Client.AutorestClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Type")]
-        public string Type { get; set; }
+        [JsonProperty(PropertyName = "PhoneNumber")]
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Value")]
-        public string Value { get; set; }
+        [JsonProperty(PropertyName = "Message")]
+        public string Message { get; set; }
 
     }
 }

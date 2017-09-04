@@ -25,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lykke.AzureRepositories" Version="1.0.74" />
+    <PackageReference Include="Lykke.AzureRepositories" Version="1.0.76" />
     <PackageReference Include="Lykke.Common" Version="1.1.95" />
     <PackageReference Include="Lykke.Common.ApiLibrary" Version="1.0.11" />
-    <PackageReference Include="Lykke.Core" Version="1.0.74" />
+    <PackageReference Include="Lykke.Core" Version="1.0.76" />
     <PackageReference Include="Lykke.Logs" Version="1.0.33" />
     <PackageReference Include="Lykke.Service.Session" Version="1.0.34-beta53" />
     <PackageReference Include="Lykke.SettingsReader" Version="1.0.38" />

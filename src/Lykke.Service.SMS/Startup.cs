@@ -60,6 +60,7 @@ namespace Lykke.Service.SMS
             builder.Populate(services);
             ApplicationContainer = builder.Build();
 
+
             return new AutofacServiceProvider(ApplicationContainer);
         }
 

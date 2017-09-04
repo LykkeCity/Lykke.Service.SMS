@@ -39,11 +39,10 @@ namespace Lykke.Job.SMS.Modules
 
             // NOTE: Service registrations example:
 
-            builder.RegisterType<MyFooService>()
-                .As<IMyFooService>();
+            builder.RegisterType<SendSmsService>()
+                .As<ISendSmsService>();
 
-            builder.RegisterType<MyBooService>()
-                .As<IMyBooService>();
+            
 
             // NOTE: You can implement your own poison queue notifier. See https://github.com/LykkeCity/JobTriggers/blob/master/readme.md
             // builder.Register<PoisionQueueNotifierImplementation>().As<IPoisionQueueNotifier>();
