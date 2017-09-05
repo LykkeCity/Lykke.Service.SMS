@@ -26,7 +26,7 @@ namespace Lykke.Service.SMS.Services
             //+375447890502
             bool useAlter = false;
 
-            var settings = await _traderRepository.GetPropertiyByPhoneNumber("+375447890502", "SmsSettings");
+            var settings = await _traderRepository.GetPropertiyByPhoneNumber(sms.PhoneNumber, "SmsSettings");
             if (!string.IsNullOrEmpty(settings))
             {
                 try
