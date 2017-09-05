@@ -9,6 +9,7 @@ using Lykke.Service.SMS.Core;
 using Lykke.Service.SMS.Core.Services;
 using Lykke.Service.SMS.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Service.SMS.Modules
 {
@@ -46,6 +47,12 @@ namespace Lykke.Service.SMS.Modules
             var smsRepository = new SmsServiceRepository(new AzureRepositories.Azure.Tables.AzureTableStorage<SmsEntity>(_settings.Db.SmsConnString, "SmsServiceRequests", log), log);
             builder.RegisterInstance(smsRepository)
                 .As<ISmsServiceRepository>()
+                .SingleInstance();
+
+            var traderRepository = new TraderRepository(new AzureRepositories.Azure.Tables.AzureTableStorage<TableEntity>(_settings.Db.TraderConnectionString, "Traders", log),
+                    new AzureRepositories.Azure.Tables.AzureTableStorage<TraderSettings>(_settings.Db.TraderConnectionString, "TraderSettings", log));
+            builder.RegisterInstance(traderRepository)
+                .As<ITraderRepository>()
                 .SingleInstance();
 
             builder.RegisterType<SmsService>()

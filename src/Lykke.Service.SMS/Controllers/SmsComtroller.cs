@@ -22,6 +22,7 @@ namespace Lykke.Service.SMS.Controllers
        [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody]SmsRequestModel reuqest)
         {
+            
             if (string.IsNullOrEmpty(reuqest.PhoneNumber))
             {
                 return Json(new SmsResponseModel {SmsPostRequestStatus = SmsPostRequestStatus.PhoneNumberEmpty});
@@ -35,7 +36,7 @@ namespace Lykke.Service.SMS.Controllers
             {
                 Message = reuqest.Message,
                 PhoneNumber = reuqest.PhoneNumber,
-                PhoneOperator = PhoneOperator.Twilio
+                PhoneOperator = PhoneOperator.Nexmo
             });
             return Json(new {result});
         }

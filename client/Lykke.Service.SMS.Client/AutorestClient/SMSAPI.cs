@@ -346,16 +346,8 @@ namespace Lykke.Service.SMS.Client.AutorestClient
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            try
-            {
-                _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken); //.ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                //throw;
-            }
-            
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+
             if (_shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
