@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Lykke.Service.SMS.Controllers
 {
     [Route("api/[controller]")]
-    public class SmsComtroller : Controller
+    public class SmsController : Controller
     {
         private readonly ISmsService _smsService;
 
-        public SmsComtroller(ISmsService smsService)
+        public SmsController(ISmsService smsService)
         {
             _smsService = smsService;
         }
