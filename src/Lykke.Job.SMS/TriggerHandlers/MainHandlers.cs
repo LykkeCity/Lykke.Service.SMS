@@ -19,7 +19,7 @@ namespace Lykke.Job.SMS.TriggerHandlers
             _healthService = healthService;
         }
 
-        [TimerTrigger("00:00:10")]
+        [TimerTrigger("00:00:01")]
         public async Task TimeTriggeredHandler()
         {
             try
