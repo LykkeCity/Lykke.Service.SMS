@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Service.SMS.Client.AutorestClient;
-using Lykke.Service.SMS.Services;
 using SmsRequestModel = Lykke.Service.SMS.Client.AutorestClient.Models.SmsRequestModel;
 
 namespace Lykke.Service.SMS.Client

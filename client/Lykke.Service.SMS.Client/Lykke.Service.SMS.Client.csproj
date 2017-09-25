@@ -31,8 +31,4 @@
     <Folder Include="AutorestClient\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Lykke.Service.SMS.Services\Lykke.Service.SMS.Services.csproj" />
-  </ItemGroup>
-
 </Project>
