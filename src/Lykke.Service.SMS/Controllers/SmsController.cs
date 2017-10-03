@@ -34,6 +34,7 @@ namespace Lykke.Service.SMS.Controllers
             
             var result = await _smsService.SendSms(new SmsModel
             {
+                PartnerId = reuqest.PartnerId,
                 Message = reuqest.Message,
                 PhoneNumber = reuqest.PhoneNumber,
                 PhoneOperator = PhoneOperator.Nexmo

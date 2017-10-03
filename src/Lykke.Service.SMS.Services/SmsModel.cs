@@ -8,6 +8,7 @@ namespace Lykke.Service.SMS.Services
 {
     public class SmsModel : ISmsModel
     {
+        public string PartnerId { get; set; }
         public string PhoneNumber { get; set; }
         public string Message { get; set; }
         public PhoneOperator PhoneOperator { get; set; }

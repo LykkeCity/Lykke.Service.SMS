@@ -6,6 +6,7 @@ namespace Lykke.Service.SMS.Services
 {
     public class SmsRequestModel
     {
+        public string PartnerId { get; set; }
         public string PhoneNumber { get; set; }
         public string Message { get; set; }
     }
